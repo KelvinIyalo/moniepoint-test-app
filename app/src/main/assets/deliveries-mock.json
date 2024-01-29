@@ -1,0 +1,47 @@
+[
+  {
+    "itemName": "Mac book pro M2",
+    "from_route": "Nigeria",
+    "to_route": "Ghana",
+    "date_sent": "2024-01-26",
+    "receipt_number": "#NEJ237446254",
+    "status": "Delivered",
+    "amount": 10
+  },
+  {
+    "itemName": "Summer linen jacket",
+    "from_route": "Colombia",
+    "to_route": "Paris",
+    "date_sent": "2024-01-27",
+    "receipt_number": "#NEJ238746254",
+    "status": "In transit",
+    "amount": 20
+  },
+  {
+    "itemName": "Slim fit jeans",
+    "from_route": "Bogota",
+    "to_route": "Dubai",
+    "date_sent": "2024-01-28",
+    "receipt_number": "#NEJ578746254",
+    "status": "Pending",
+    "amount": 15
+  },
+  {
+    "itemName": "Slim Samsung Phone",
+    "from_route": "France",
+    "to_route": "Germany",
+    "date_sent": "2024-01-28",
+    "receipt_number": "#NEJ237423254",
+    "status": "Pending",
+    "amount": 15
+  },
+  {
+    "itemName": "Iphone 15 5G",
+    "from_route": "London",
+    "to_route": "Lagos",
+    "date_sent": "2024-01-28",
+    "receipt_number": "#NEJ237446250",
+    "status": "Pending",
+    "amount": 15
+  }
+]

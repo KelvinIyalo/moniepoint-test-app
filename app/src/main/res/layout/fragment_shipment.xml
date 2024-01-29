@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ui.ShipmentFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="toolbar_shipment"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/purple_700"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Shipment History"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white">
+
+            <LinearLayout
+                android:id="@+id/back_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:layoutAnimation="@anim/layout_animation_left_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:drawableTop="@drawable/arrow_back"
+                    android:paddingTop="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layoutAnimation="@anim/layout_animation"
+                app:layout_constraintBottom_toBottomOf="@id/back_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/back_btn">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:gravity="center"
+                    android:text="Shipment History"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_header_16sp"
+                    android:transitionName="title_shipment" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_700"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layoutAnimation="@anim/layout_animation_right"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/all_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="All"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/all_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_widget"
+                        android:backgroundTint="@color/button_color"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/all"
+                        app:layout_constraintStart_toEndOf="@id/all"
+                        app:layout_constraintTop_toTopOf="@id/all"
+                        tools:text="5" />
+
+                    <View
+                        android:id="@+id/allLiner"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/button_color"
+                        app:layout_constraintEnd_toEndOf="@id/all_count"
+                        app:layout_constraintStart_toStartOf="@id/all"
+                        app:layout_constraintTop_toBottomOf="@id/all_count" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/completed_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/completed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Completed"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/completed_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_widget"
+                        android:backgroundTint="@color/gray"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/completed"
+                        app:layout_constraintStart_toEndOf="@id/completed"
+                        app:layout_constraintTop_toTopOf="@id/completed"
+                        tools:text="5" />
+
+                    <View
+                        android:id="@+id/completedLiner"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="@id/completed_count"
+                        app:layout_constraintStart_toStartOf="@id/completed"
+                        app:layout_constraintTop_toBottomOf="@id/completed_count" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/in_progress_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/in_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="In Progress"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/in_progress_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_widget"
+                        android:backgroundTint="@color/gray"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:text="5"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/in_progress"
+                        app:layout_constraintStart_toEndOf="@id/in_progress"
+                        app:layout_constraintTop_toTopOf="@id/in_progress" />
+
+                    <View
+                        android:id="@+id/in_progressLiner"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="@id/in_progress_count"
+                        app:layout_constraintStart_toStartOf="@id/in_progress"
+                        app:layout_constraintTop_toBottomOf="@id/in_progress_count" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/pending_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/pending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Pending Order"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pending_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_widget"
+                        android:backgroundTint="@color/gray"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/pending"
+                        app:layout_constraintStart_toEndOf="@id/pending"
+                        app:layout_constraintTop_toTopOf="@id/pending"
+                        tools:text="5" />
+
+                    <View
+                        android:id="@+id/pendingLiner"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="@id/pending_count"
+                        app:layout_constraintStart_toStartOf="@id/pending"
+                        app:layout_constraintTop_toBottomOf="@id/pending_count" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/canceled_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/canceled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Canceled"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        app:layout_constraintBottom_toTopOf="@id/canceledLiner"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/canceled_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_widget"
+                        android:backgroundTint="@color/gray"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_normal_14sp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="@id/canceled"
+                        app:layout_constraintStart_toEndOf="@id/canceled"
+                        app:layout_constraintTop_toTopOf="@id/canceled"
+                        tools:text="5" />
+
+                    <View
+                        android:id="@+id/canceledLiner"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shipment_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layoutAnimation="@anim/layout_animation"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_section"
+        tools:itemCount="12"
+        tools:listitem="@layout/shipment_history_item" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

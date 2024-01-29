@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circular_widget"
+        android:backgroundTint="@color/purple_700"
+        android:scaleType="center"
+        android:src="@drawable/shipment_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sender_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Mac book pro M2"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_normal_14sp"
+        app:layout_constraintStart_toEndOf="@id/image_view"
+        app:layout_constraintTop_toTopOf="@id/image_view" />
+
+    <TextView
+        android:id="@+id/receipt_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:drawableEnd="@drawable/status"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/header_gray"
+        android:fontFamily="@font/lato_bold"
+        android:text="#NEJ20089934122231"
+        android:textSize="@dimen/small_text_12sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintStart_toEndOf="@id/image_view"
+        app:layout_constraintTop_toBottomOf="@+id/sender_label" />
+
+    <TextView
+        android:id="@+id/from_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:drawableEnd="@drawable/baseline_arrow_forward_24"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/header_gray"
+        android:fontFamily="@font/lato_bold"
+        android:text="Paris"
+        android:textSize="@dimen/small_text_12sp"
+        app:layout_constraintBottom_toBottomOf="@id/receipt_num"
+        app:layout_constraintStart_toEndOf="@id/receipt_num"
+        app:layout_constraintTop_toTopOf="@id/receipt_num" />
+
+    <TextView
+        android:id="@+id/to_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Nigeria"
+        android:textSize="@dimen/small_text_12sp"
+        app:layout_constraintBottom_toBottomOf="@id/from_route"
+        app:layout_constraintStart_toEndOf="@id/from_route"
+        app:layout_constraintTop_toTopOf="@id/from_route" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/header_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view" />
+</androidx.constraintlayout.widget.ConstraintLayout>
