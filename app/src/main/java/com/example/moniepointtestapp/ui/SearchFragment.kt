@@ -3,12 +3,8 @@ package com.example.moniepointtestapp.ui
 import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
@@ -16,14 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.moniepointtestapp.R
 import com.example.moniepointtestapp.adapter.SearchTransactionAdapter
-import com.example.moniepointtestapp.adapter.TransactionsAdapter
 import com.example.moniepointtestapp.databinding.FragmentSearchBinding
 import com.example.moniepointtestapp.model.SearchDeliveries
-import com.example.moniepointtestapp.model.ShipmentDetails
 import com.example.moniepointtestapp.utils.Utility
+import com.example.moniepointtestapp.utils.Utility.startMoveUpAnimation
 import com.example.moniepointtestapp.vm.SearchDeliveriesViewModel
-import com.example.moniepointtestapp.vm.TransactionsViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     lateinit var binding: FragmentSearchBinding
@@ -38,7 +31,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         sharedElementEnterTransition = animation
         sharedElementReturnTransition = animation
 
-        Utility.showNavBar(false, activity)
         initTransactionsRecyclerViewAdapter()
         with(binding) {
             searchEt.requestFocus()
@@ -56,21 +48,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             searchEt.addTextChangedListener {
                 viewModel.filterBySearchQuery(it.toString())
             }
-
-            val animation =
-                AnimationUtils.loadAnimation(requireContext(), R.anim.move_up)
-
-            // Apply the animation to your TextView
-            cardviewRecycler.startAnimation(animation)
         }
 
 
         viewModel.transactions.observe(viewLifecycleOwner) { uiState ->
             searchTransactionAdapter.submitList(uiState.searchDeliveries)
-            val animation_move =
-                AnimationUtils.loadAnimation(requireContext(), R.anim.move_up)
-
-            binding.cardviewRecycler.startAnimation(animation_move)
+            binding.cardviewRecycler.startMoveUpAnimation(requireContext())
         }
     }
 

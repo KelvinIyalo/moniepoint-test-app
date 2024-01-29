@@ -24,17 +24,16 @@ class CategoriesViewModel @Inject constructor(private val shipmentDetailsReposit
 
     init {
         viewModelScope.launch {
-            retrieveTransactions()
+            retrieveCategories()
         }
     }
 
-    private suspend fun retrieveTransactions() {
+    private suspend fun retrieveCategories() {
         combine(
             _transactionType,
             flowOf(shipmentDetailsRepository.getCategories()),
             _searchQuery
         ) { transactionType, transactions, searchQuery ->
-            Log.d("XXXX categorie", transactions.toString())
             TFUiState(
                 transactionType,
                 categories = transactions

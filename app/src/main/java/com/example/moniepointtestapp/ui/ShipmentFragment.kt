@@ -18,20 +18,19 @@ import com.example.moniepointtestapp.model.ShipmentStatus
 import com.example.moniepointtestapp.model.TableItem
 import com.example.moniepointtestapp.utils.UiState
 import com.example.moniepointtestapp.utils.Utility
-import com.example.moniepointtestapp.vm.TransactionsViewModel
+import com.example.moniepointtestapp.utils.Utility.startMoveUpAnimation
+import com.example.moniepointtestapp.vm.ShipmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ShipmentFragment : Fragment(R.layout.fragment_shipment) {
     lateinit var binding: FragmentShipmentBinding
-    private val viewModel: TransactionsViewModel by activityViewModels()
+    private val viewModel: ShipmentViewModel by activityViewModels()
     private lateinit var transactionsAdapter: ShippingAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentShipmentBinding.bind(view)
-        Utility.showNavBar(false, activity)
-        val animation =
-            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         sharedElementEnterTransition = animation
         sharedElementReturnTransition = animation
         with(binding) {
@@ -42,8 +41,8 @@ class ShipmentFragment : Fragment(R.layout.fragment_shipment) {
         initClickListeners()
 
         viewModel.transactions.observe(viewLifecycleOwner) { uiState ->
-            Log.d("XXXX Transaction", uiState.shipmentDetails.toString())
             transactionsAdapter.submitList(uiState.shipmentDetails)
+            binding.shipmentRecyclerview.startMoveUpAnimation(requireContext())
             updateSelectedTab(uiState.shipmentStatus!!)
         }
     }
@@ -140,21 +139,11 @@ class ShipmentFragment : Fragment(R.layout.fragment_shipment) {
 
 
         with(binding) {
-            val layoutToFilterFunction = mapOf(
-                allLayout to viewModel::filterByAll,
-                completedLayout to viewModel::filterByCompleted,
-                pendingLayout to viewModel::filterByPending,
-                canceledLayout to viewModel::filterByCancelled,
-                inProgressLayout to viewModel::filterByInProgress
-            )
+            val filterButtons = listOf(allLayout, completedLayout, pendingLayout, canceledLayout, inProgressLayout)
+            val statuses = listOf(ShipmentStatus.ALL, ShipmentStatus.COMPLETED, ShipmentStatus.PENDING_ORDER, ShipmentStatus.CANCELLED, ShipmentStatus.IN_PROGRESS)
 
-            layoutToFilterFunction.forEach { (layout, filterFunction) ->
-                layout.setOnClickListener {
-                    filterFunction()
-                    val animationMoveUp =
-                        AnimationUtils.loadAnimation(requireContext(), R.anim.move_up)
-                    binding.shipmentRecyclerview.startAnimation(animationMoveUp)
-                }
+            filterButtons.forEachIndexed { index, layout ->
+                layout.setOnClickListener { viewModel.filterByStatus(statuses[index]) }
             }
         }
 

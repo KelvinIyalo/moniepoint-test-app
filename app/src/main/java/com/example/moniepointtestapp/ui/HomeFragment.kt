@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.moniepointtestapp.R
 import com.example.moniepointtestapp.databinding.FragmentHomeBinding
 import com.example.moniepointtestapp.utils.Utility
+import com.example.moniepointtestapp.utils.Utility.startMoveUpAnimation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -25,9 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-
-
-
 
         with(binding) {
             searchEt.setOnClickListener {
@@ -45,9 +43,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 )
             }
 
-            val animation =
-                AnimationUtils.loadAnimation(requireContext(), R.anim.move_up)
-//         val navigationView =   requireView().findViewById<BottomNavigationView>(R.id.nav_view)
             navView.menu.findItem(R.id.navigation_home).isChecked = true
             navView.setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
@@ -86,16 +81,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     else -> false
                 }
             }
-            // Apply the animation to your TextView
-            binding.availableVehicles.startAnimation(animation)
-            binding.shipmentDetails.startAnimation(animation)
-            binding.trackingLabel.startAnimation(animation)
+
+            binding.availableVehicles.startMoveUpAnimation(requireContext())
+            binding.shipmentDetails.startMoveUpAnimation(requireContext())
+            binding.trackingLabel.startMoveUpAnimation(requireContext())
         }
     }
 
     override fun onResume() {
         super.onResume()
-        Utility.showNavBar(true, activity)
         binding.navView.menu.findItem(R.id.navigation_home).isChecked = true
     }
 

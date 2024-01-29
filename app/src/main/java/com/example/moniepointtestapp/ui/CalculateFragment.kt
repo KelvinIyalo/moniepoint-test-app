@@ -21,6 +21,7 @@ import com.example.moniepointtestapp.databinding.CategoryTypeBinding
 import com.example.moniepointtestapp.databinding.FragmentCalculateBinding
 import com.example.moniepointtestapp.model.Categories
 import com.example.moniepointtestapp.utils.Utility
+import com.example.moniepointtestapp.utils.Utility.startMoveUpAnimation
 import com.example.moniepointtestapp.vm.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -36,58 +37,42 @@ class CalculateFragment : Fragment(R.layout.fragment_calculate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCalculateBinding.bind(view)
-        Utility.showNavBar(false, activity)
-        val animationMoveUp = AnimationUtils.loadAnimation(requireContext(), R.anim.move_up)
+        val animation =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
 
         with(binding) {
             calculateBtn.setOnClickListener {
                 animateAndNavigation()
             }
             backBtn.setOnClickListener { findNavController().popBackStack() }
-            calculateBtn.startAnimation(animationMoveUp)
-            categoriesLabel.startAnimation(animationMoveUp)
-            quest2Label.startAnimation(animationMoveUp)
-            questLabel.startAnimation(animationMoveUp)
-            packagingLabel.startAnimation(animationMoveUp)
-            sendingPackageCard.startAnimation(animationMoveUp)
-            destinationLabel.startAnimation(animationMoveUp)
-            cardParams.startAnimation(animationMoveUp)
+            calculateBtn.startMoveUpAnimation(requireContext())
+            categoriesLabel.startMoveUpAnimation(requireContext())
+            quest2Label.startMoveUpAnimation(requireContext())
+            questLabel.startMoveUpAnimation(requireContext())
+            packagingLabel.startMoveUpAnimation(requireContext())
+            sendingPackageCard.startMoveUpAnimation(requireContext())
+            destinationLabel.startMoveUpAnimation(requireContext())
+            cardParams.startMoveUpAnimation(requireContext())
         }
         initTransactionsRecyclerViewAdapter()
-        val animation = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
-        sharedElementEnterTransition = animation
-        sharedElementReturnTransition = animation
 
         viewModel.transactions.observe(viewLifecycleOwner) { uiState ->
             categoriesAdapter.submitList(uiState.categories)
         }
     }
 
-    private fun animateAndNavigation(){
+    private fun animateAndNavigation() {
         val animationBounce = AnimationUtils.loadAnimation(requireContext(), R.anim.btn_bounce)
         binding.calculateBtn.startAnimation(animationBounce)
         Handler().postDelayed({
             val direction = R.id.action_navigation_calculate_to_calculationSuccessFragment
             val extras = FragmentNavigatorExtras(
-            binding.boxIc to "calculate_success"
-        )
-            findNavController().navigate(direction,null,null,extras)
+                binding.boxIc to "calculate_success"
+            )
+            findNavController().navigate(direction, null, null, extras)
         }, 400)
-//        animationBounce.setAnimationListener(object :AnimationListener{
-//            override fun onAnimationStart(p0: android.view.animation.Animation?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onAnimationEnd(p0: android.view.animation.Animation?) {
-//                findNavController().navigate(direction)
-//            }
-//
-//            override fun onAnimationRepeat(p0: android.view.animation.Animation?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        }
-//        )
 
     }
 
